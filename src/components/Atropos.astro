@@ -1,0 +1,49 @@
+---
+import "atropos/css";
+const {zIndex} = Astro.props;
+---
+
+<div class="atropos my-atropos atropos_wrapper">
+  <div class="atropos-scale">
+    <div class="atropos-rotate">
+      <div class="atropos-inner content_wrapper">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" hoist>
+  import Atropos from "atropos";
+  Atropos({
+    el: ".my-atropos",
+    activeOffset: 0,
+    rotateXMax: 0.1,
+    rotateYMax: 0.1,
+    shadow: false,
+    highlight: false,
+    rotateTouch: false,
+    rotateXInvert: true,
+    rotateYInvert: true,
+    duration: 2000,
+  });
+</script>
+
+<style define:vars={{zIndex}}>
+  .atropos_wrapper {
+    z-index: var(--zIndex);
+    height: 100vh;
+  }
+
+  .content_wrapper {
+    scale: 1.1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .content_wrapper :global(> *) {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+  }
+</style>

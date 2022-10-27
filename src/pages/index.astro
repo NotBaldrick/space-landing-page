@@ -1,0 +1,13 @@
+---
+import "normalize.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
+import WobbleEffect from "../components/WobbleEffect.astro";
+import Navbar from "../components/Navbar.astro";
+---
+
+<BaseLayout title="Bonjour">
+  <Navbar />
+  <LandingLayout />
+  <WobbleEffect />
+</BaseLayout>

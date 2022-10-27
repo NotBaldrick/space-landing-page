@@ -1,0 +1,63 @@
+---
+const {zIndex, offset} = Astro.props;
+---
+
+<div class="wrapper" data-atropos-offset={offset}>
+  <img
+    id="planet_outline"
+    class="planet outline"
+    src="/planet_outline.webp"
+    alt="planet"
+    draggable="false"
+  />
+  <img class="planet" src="/planet.webp" alt="planet" draggable="false" />
+</div>
+
+<script>
+  const planetOutlineEl = document.getElementById("planet_outline");
+
+  document.addEventListener(
+    "mainTextButtonMouseEnter",
+    () => (planetOutlineEl.style.opacity = "1")
+  );
+
+  document.addEventListener(
+    "mainTextButtonMouseLeave",
+    () => (planetOutlineEl.style.opacity = "0")
+  );
+</script>
+
+<style define:vars={{zIndex}}>
+  .wrapper {
+    z-index: var(--zIndex);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .planet {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30rem;
+  }
+
+  @media (max-width: 1250px) {
+    .planet {
+      width: 20rem;
+    }
+  }
+
+  .outline:hover {
+    opacity: 1;
+  }
+
+  .outline {
+    pointer-events: all;
+    z-index: 1;
+    opacity: 0;
+    filter: url("#wiggly-effect");
+    transition: opacity 1s ease-in-out;
+  }
+</style>

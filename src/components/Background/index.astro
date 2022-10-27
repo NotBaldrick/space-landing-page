@@ -1,0 +1,35 @@
+---
+import Monkey from "./Monkey.astro";
+import Planet from "./Planet.astro";
+import Stars from "./Stars.astro";
+import ShootingStars from "./ShootingStars.astro";
+import Grain from "./Grain.astro";
+import Atropos from "../Atropos.astro";
+---
+
+<div class="wrapper">
+  <Grain zIndex="3" />
+  <Atropos zIndex="2">
+    <Monkey zIndex="4" offset="7" />
+    <ShootingStars zIndex="3" offset="3" />
+    <Planet zIndex="2" offset="-2" />
+  </Atropos>
+  <Stars zIndex="1" />
+</div>
+
+<style>
+  .wrapper {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    inset: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .wrapper :global(> *) {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+  }
+</style>

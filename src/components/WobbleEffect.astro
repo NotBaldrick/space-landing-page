@@ -1,0 +1,13 @@
+<svg style="display: none;">
+  <filter id="wiggly-effect">
+    <feTurbulence baseFrequency="0.05" numOctaves="1" seed="100">
+      <animate
+        attributeName="seed"
+        repeatCount="indefinite"
+        from="1"
+        to="100"
+        dur="25s"></animate>
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" scale="3"></feDisplacementMap>
+  </filter>
+</svg>

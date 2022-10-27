@@ -1,0 +1,113 @@
+---
+const {zIndex, offset} = Astro.props;
+---
+
+<div class="wrapper" data-atropos-offset={offset}>
+  <div class="shooting_star shooting_star-1">
+    <div id="shooting_star_drawing" class="shooting_star_drawing"></div>
+  </div>
+  <div class="shooting_star shooting_star-2">
+    <div id="shooting_star_drawing" class="shooting_star_drawing"></div>
+  </div>
+  <div class="shooting_star shooting_star-3">
+    <div id="shooting_star_drawing" class="shooting_star_drawing"></div>
+  </div>
+</div>
+
+<script>
+  const shootingStarDrawingEls = [
+    ...document.querySelectorAll("#shooting_star_drawing"),
+  ];
+
+  document.addEventListener("mainTextButtonMouseEnter", () =>
+    shootingStarDrawingEls.forEach((el) => {
+      // @ts-ignore
+      el.style.opacity = "1";
+    })
+  );
+
+  document.addEventListener("mainTextButtonMouseLeave", () =>
+    shootingStarDrawingEls.forEach((el) => {
+      // @ts-ignore
+      el.style.opacity = "0";
+    })
+  );
+</script>
+
+<style define:vars={{zIndex}}>
+  .wrapper {
+    z-index: var(--zIndex);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .shooting_star {
+    position: absolute;
+    right: calc(0vw - 10rem);
+    height: 0.05rem;
+    width: 10rem;
+    background-image: linear-gradient(to right, white, white 5%, transparent);
+  }
+
+  .shooting_star_drawing {
+    position: absolute;
+    inset: 0;
+    background-image: url("/shooting_star.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 4rem;
+    aspect-ratio: 6 / 3;
+    translate: -1rem -50%;
+    filter: url("#wiggly-effect");
+    opacity: 0;
+    pointer-events: all;
+    transition: opacity 1s ease-in-out 1s;
+  }
+
+  .shooting_star_drawing:hover {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .shooting_star-1 {
+    scale: 0.9;
+    top: 15vh;
+    animation: flying 15s forwards 2s infinite linear,
+      twinkle 1.5s alternate-reverse infinite ease-in-out;
+  }
+
+  .shooting_star-2 {
+    scale: 1.1;
+    top: 35vh;
+    animation: flying 7.5s forwards infinite linear,
+      twinkle 2s alternate-reverse infinite ease-in-out;
+  }
+
+  .shooting_star-3 {
+    top: 55vh;
+    animation: flying 10s forwards 1s infinite linear,
+      twinkle 1s alternate-reverse infinite ease-in-out;
+  }
+
+  @keyframes flying {
+    from {
+      right: calc(0vw - 10rem);
+    }
+    to {
+      right: calc(100vw + 10rem);
+    }
+  }
+
+  @keyframes twinkle {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.5;
+    }
+  }
+</style>
